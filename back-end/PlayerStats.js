@@ -1,0 +1,31 @@
+var mongoose = require('mongoose');
+
+module.exports = mongoose.model('PlayerStats', {
+    playerId: Number,
+    playerName: String,
+    pts: Number,
+    reb: Number,
+    ast: Number,
+    age: Number,
+    gp: Number,
+    minutes: Number,
+    fgm: Number,
+    fga: Number,
+    fgPct: Number,
+    fG3M: Number,
+    fG3A: Number,
+    fg3Pct: Number,
+    ftm: Number,
+    fta: Number,
+    ftPct: Number,
+    oreb: Number,
+    dreb: Number,
+    tov: Number,
+    stl: Number,
+    blk: Number,
+    pf: Number,
+    plusMinus: Number,
+    dD2: Number,
+    tD3: Number,
+    hi: String
+});
