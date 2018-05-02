@@ -1,9 +1,7 @@
 const NBA = require("nba");
-const curry = NBA.findPlayer('LeBron James');
 const PlayerStats = require('./PlayerStats');
 const GameLog = require('./GameLog');
 const PlayerInfo = require('./PlayerInfo');
-console.log(curry);
 
 
 // var myPromise = new Promise(function(resolve, reject){
@@ -115,11 +113,9 @@ mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
 //    return keys;
 // }
 
-app.get('/getPlayerInfo',(req,res)=>{
-  var player = req.body;
-
+app.post('/getPlayerInfo',(req,res)=>{
   PlayerStats.findOne(
-      {playerName: "LeBron James"},
+      {playerName: req.body.playerName},
       function(err, result) {
          var promise = NBA.stats.playerInfo({PlayerID:result.playerId});
          promise.then(function(data){
@@ -129,20 +125,16 @@ app.get('/getPlayerInfo',(req,res)=>{
 
 });
 
-app.get('/getPlayerStats',(req,res) => {
-  var player =  req.body;
-  //console.log(player);
+app.post('/getPlayerStats',(req,res) => {
    PlayerStats.findOne(
-       {playerName: "LeBron James"},
+       {playerName: req.body.playerName},
        function(err, result) {
            res.send(result);
        });
 })
 
-app.get('/getStats', (req, res) => {
-  var player =  req.body.playerName;
-  //console.log(player);
-  GameLog.find({playerName: "LeBron James"},
+app.post('/getStats', (req, res) => {
+  GameLog.find({playerName: req.body.playerName},
       function(err, result) {
         console.log(result.length);
           res.send(result);

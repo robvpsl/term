@@ -9,6 +9,8 @@
 
     <title>NBA stats</title>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
     <!-- Bootstrap core CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,7 +22,7 @@
   </head>
 
   <body  ng-controller="myCtrl">
-      <div class="cover-container d-flex w-100 mx-auto flex-column">
+      <div class="cover-container d-flex w-100  flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
           <h3 class="masthead-brand">For NBA stat junkies</h3>
@@ -47,13 +49,14 @@
               <table class="table table-borderless table-dark">
                 <tbody>
                   <tr>
-                    <th><img  src="https://cdn-s3.si.com/s3fs-public/teams/basketball/nba/players/214152-300x300.png" alt="Generic placeholder image" style="width:150px;height:150px;"></th>
+                    <th><img  src="{{img}}" alt="Generic placeholder image" style="width:200px;height:150px;"></th>
                     <td><h5 class="mt-0">{{playerInfo.commonPlayerInfo[0].displayFirstLast}}</h5>
                       <p>Age: {{player.age}}  &emsp; Position: {{playerInfo.commonPlayerInfo[0].position}}</p>
                       <p>Height: {{playerInfo.commonPlayerInfo[0].height}} &emsp; Weight: {{playerInfo.commonPlayerInfo[0].weight}}</p>
                       <p>Seasons: {{playerInfo.commonPlayerInfo[0].seasonExp}} &emsp; Number: {{playerInfo.commonPlayerInfo[0].jersey}}</p>
                       <p>Team: {{playerInfo.commonPlayerInfo[0].teamCity}} {{playerInfo.commonPlayerInfo[0].teamName}}</p>
                       <p>School: {{playerInfo.commonPlayerInfo[0].school}} </p>
+                      <button type="button" class="btn btn-primary btn-sm" ng-click="compare()" >{{buttonString}}</button>
                       <br>
                       <br>
                     </td>
@@ -184,6 +187,124 @@
       </table>
       </div>
 
+     <a href="" data-toggle="modal" data-target="#exampleModalLong" id="myModalShower"></a>
+
+      <!-- Modal -->
+      <div class="modal" id="exampleModalLong" data-backdrop="true" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" >
+          <div class="">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Comparison</h5>
+              <button type="button" class="close white">
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Stats</th>
+                    <th ng-repeat="pl in players">
+                      {{pl.playerName}}
+                      <button type="button" class="close white" ng-click="remove()">
+                        <span aria-hidden="true" ng-click="remove()">&times;</span>
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" >Points</th>
+                    <td ng-repeat="pl in players">{{pl.pts}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >Rebounds</th>
+                    <td ng-repeat="pl in players">{{pl.reb}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >Assits</th>
+                    <td ng-repeat="pl in players">{{pl.ast}}</td>
+                  <tr>
+                    <th scope="row" >Blocks</th>
+                    <td ng-repeat="pl in players">{{pl.blk}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >Steals</th>
+                    <td ng-repeat="pl in players">{{pl.stl}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >TO</th>
+                    <td ng-repeat="pl in players">{{pl.tov}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >PF</th>
+                    <td ng-repeat="pl in players">{{pl.pf}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >FGM</th>
+                    <td ng-repeat="pl in players">{{pl.fgm}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >FGA</th>
+                    <td ng-repeat="pl in players">{{pl.fga}}</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" >FG%</th>
+                    <td ng-repeat="pl in players">{{pl.fgPct}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >3PM</th>
+                    <td ng-repeat="pl in players">{{pl.fG3M}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >3PA</th>
+                    <td ng-repeat="pl in players">{{pl.fG3A}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >3P%</th>
+                    <td ng-repeat="pl in players">{{pl.fg3Pct}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >FTM</th>
+                    <td ng-repeat="pl in players">{{pl.ftm}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >FTA</th>
+                    <td ng-repeat="pl in players">{{pl.fta}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >FT%</th>
+                    <td ng-repeat="pl in players">{{pl.ftPct}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >+/-</th>
+                    <td ng-repeat="pl in players">{{pl.plusMinus}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >DD</th>
+                    <td ng-repeat="pl in players">{{pl.dD2}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >TD</th>
+                    <td ng-repeat="pl in players">{{pl.tD3}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" >GP</th>
+                    <td ng-repeat="pl in players">{{pl.gp}}</td>
+                  </tr>
+
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
@@ -191,12 +312,15 @@
         </div>
       </footer>
     </div>
+    <br>
+
+  <!-- <div class = "w-100"></div> -->
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="../../../../assets/js/vendor/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

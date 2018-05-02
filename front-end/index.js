@@ -1,33 +1,63 @@
 var app = angular.module("myStats", []);
 app.controller("myCtrl", function($scope,$http) {
   $scope.hide = true;
+  $scope.buttonString = "Compare";
+  var check = true;
+  $scope.players = [];
+  $scope.showModal = false;
+  $scope.modal = "";
+  $scope.img = "";
 
   $scope.getStats = function(name){
 
-    $scope.hide = false;
+    $scope.buttonString = "Compare";
 
-    console.log("hi");
+
+
+    $scope.hide = false;
     var obj = {"playerName":name};
+
+    console.log(obj);
+
     $scope.stats = [];
-    $scope.playerStats = {};
+    $scope.player = {};
     $scope.playerInfo = {};
 
-    $http.get('http://localhost:3000/getPlayerInfo', obj).then(function(result){
+    $http.post('http://localhost:3000/getPlayerInfo', obj).then(function(result){
       console.log(result);
       $scope.playerInfo = result.data;
+      $scope.img = "https://nba-players.herokuapp.com/players/" + $scope.playerInfo.commonPlayerInfo[0].lastName + "/" + $scope.playerInfo.commonPlayerInfo[0].firstName;
       console.log($scope.playerInfo);
     });
 
-    $http.get('http://localhost:3000/getStats',obj).then(function(result){
+    $http.post('http://localhost:3000/getStats',obj).then(function(result){
       console.log(result);
       $scope.stats = result.data;
 
     });
-    $http.get('http://localhost:3000/getPlayerStats',obj).then(function(result){
+    $http.post('http://localhost:3000/getPlayerStats',obj).then(function(result){
       console.log(result);
       $scope.player = result.data;
 
     });
+  }
+
+  $scope.compare = function(){
+    console.log("hi");
+
+    $scope.players.push($scope.player);
+    console.log("from compare");
+    console.log($scope.players);
+    if($scope.players.length>1){
+      $("#exampleModalLong").modal()
+      //angular.element('#myModalShower').trigger('click');
+    }
+
+
+  }
+
+  $scope.remove = function(){
+    console.log("yay");
   }
 
 });
