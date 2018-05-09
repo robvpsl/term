@@ -17,47 +17,43 @@ app.controller("myCtrl", function($scope,$http) {
     $scope.hide = false;
     var obj = {"playerName":name};
 
-    console.log(obj);
 
     $scope.stats = [];
     $scope.player = {};
     $scope.playerInfo = {};
 
     $http.post('http://localhost:3000/getPlayerInfo', obj).then(function(result){
-      console.log(result);
-      $scope.playerInfo = result.data;
-      $scope.img = "https://nba-players.herokuapp.com/players/" + $scope.playerInfo.commonPlayerInfo[0].lastName + "/" + $scope.playerInfo.commonPlayerInfo[0].firstName;
-      console.log($scope.playerInfo);
+      if(result.data === "bad"){
+        $scope.hide = true;
+      }
+      else{
+        $scope.playerInfo = result.data;
+        $scope.img = "https://nba-players.herokuapp.com/players/" + $scope.playerInfo.commonPlayerInfo[0].lastName + "/" + $scope.playerInfo.commonPlayerInfo[0].firstName;
+      }
+
     });
 
     $http.post('http://localhost:3000/getStats',obj).then(function(result){
-      console.log(result);
       $scope.stats = result.data;
 
     });
     $http.post('http://localhost:3000/getPlayerStats',obj).then(function(result){
-      console.log(result);
       $scope.player = result.data;
 
     });
   }
 
   $scope.compare = function(){
-    console.log("hi");
 
     $scope.players.push($scope.player);
-    console.log("from compare");
-    console.log($scope.players);
     if($scope.players.length>1){
       $("#exampleModalLong").modal()
-      //angular.element('#myModalShower').trigger('click');
     }
 
 
   }
 
   $scope.remove = function(){
-    console.log("yay");
   }
 
 });

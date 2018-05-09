@@ -21,7 +21,7 @@
 
   </head>
 
-  <body  ng-controller="myCtrl">
+  <body  ng-controller="myCtrl" ng-cloak>
       <div class="cover-container d-flex w-100  flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
@@ -31,7 +31,7 @@
 
       <main role="main" class="inner cover">
         <h1 class="cover-heading">Get your stats.</h1>
-        <input type="text" class="form-control" placeholder="Enter player name" ng-keypress="($event.which === 13)?getStats(playerName):0" ng-model="playerName">
+        <input type="text" class="form-control" placeholder="Enter player name(case sensitive)" ng-keypress="($event.which === 13)?getStats(playerName):0" ng-model="playerName">
         <p class="lead"></p>
         <!-- <p class="lead">
           <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
@@ -42,7 +42,6 @@
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           </ol>
           <div >
             <div class="carousel-item item active">
@@ -117,9 +116,6 @@
               </table>
               <br>
               <br>
-            </div>
-            <div class="carousel-item item">
-              <p>hi2</p>
             </div>
           </div>
         </div>
@@ -308,9 +304,9 @@
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
-          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+          <!-- <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
         </div>
-      </footer>
+      </footer> -->
     </div>
     <br>
 
