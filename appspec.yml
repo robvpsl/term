@@ -3,20 +3,3 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/
-hooks:
-  BeforeInstall:
-    - location: /home/ec2-user/install_dependencies.sh
-      timeout: 300
-      runas: root
-  AfterInstall:
-    - location: /home/ec2-user/change_permissions.sh
-      timeout: 300
-      runas: root
-  ApplicationStart:
-    - location: /home/ec2-user/start_server.sh
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: /home/ec2-user/stop_server.sh
-      timeout: 300
-      runas: root
