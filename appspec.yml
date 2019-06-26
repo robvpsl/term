@@ -3,3 +3,8 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/term/
+hooks:
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+      runas: root
