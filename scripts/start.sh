@@ -1,3 +1,3 @@
 #!/bin/bash
-cd ../back-end
+cd /home/ec2-user/term/back-end
 npm start
