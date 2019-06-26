@@ -1,4 +1,3 @@
-cd ../
-npm install
-cd backend
-node app.js
+#!/bin/bash
+cd ../back-end
+npm start

@@ -4,7 +4,11 @@ files:
   - source: /
     destination: /home/ec2-user/term/
 hooks:
+  AfterInstall:
+    - location: scripts/install.sh
+      runas: root
+      timeout: 300
   ApplicationStart:
     - location: scripts/start.sh
-      timeout: 300
       runas: root
+      timeout: 60
