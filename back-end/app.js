@@ -92,6 +92,10 @@ app.post('/getStats', (req, res) => {
       });
 });
 
+app.get('/test', (req,res) => {
+  res.send('we good');
+})
+
 
 
 
