@@ -93,7 +93,7 @@ app.post('/getStats', (req, res) => {
 });
 
 app.get('/test', (req,res) => {
-  res.send('we goodddd');
+  res.send('we very good');
 })
 
 
